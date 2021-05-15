@@ -5,8 +5,8 @@ class PostsController {
     try {
       console.log("Hello post")
       const posts = await Posts.find({})
-      console.log("Hello post")
-      return res.send('index', { title: 'Posts Title'})
+      console.log(posts)
+      return res.status(200).send({ title: 'Posts Title', posts})
     } catch (error) {
       console.log(error)
       console.log('error')
