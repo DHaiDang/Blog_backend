@@ -3,7 +3,12 @@
 ### We have 3 service app, mongodb - mongoose, redis (for storge session):
 
 ## How to run : 
-
+Cách 1 : 
+```
+sudo chmod +x run.sh
+./run.sh
+```
+Cách 2 (Build tay):
 - First run Dockerfile ( service app ):
 ```
 docker build -t app/docker:v1 .
@@ -21,8 +26,31 @@ Truy cập vào cli mongodb :
 ```
 docker exec -it <id-container_mongodb> /bin/bash
 ```
+Sau khi vào được container-mongodb : 
+```
+mongo
+```
+Vài câu lệnh check db trong mongodb-cli:
+```
+show dbs
+use <db_name>
+show collections
+```
+also see : https://docs.mongodb.com/manual/reference/mongo-shell/
+Hoặc dùng flag --eval
+```
+mongo --eval "printjson(db.serverStatus())"
+```
+also see : https://stackoverflow.com/questions/4837673/how-to-execute-mongo-commands-through-shell-scripts
+Khởi động lại sau khi config file docker-compose.yml và Dockerfile
 ```
 docker-compose down
 docker-compose up
+```
 
+* Dừng tất cả các container và xoá hết images :
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a)
 ```
