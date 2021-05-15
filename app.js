@@ -3,8 +3,6 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-const session = require('./modules/session')
-const passport = require('./modules/passport')
 const mongoose = require('mongoose')
 const flash = require('connect-flash')
 
@@ -40,9 +38,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(flash())
-app.use(session)
-app.use(passport.initialize())
-app.use(passport.session())
 
 app.use('/', indexRouter)
 
