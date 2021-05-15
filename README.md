@@ -11,7 +11,7 @@ sudo chmod +x run.sh
 Cách 2 (Build tay):
 - First run Dockerfile ( service app ):
 ```
-docker build -t app/docker:v1 .
+docker build -t app/service:v1 .
 ```
 - Second install node_modules inside container and outside my project becáue folder / is mapping with container app (in other terminal screen but the same dir) : 
 ```
