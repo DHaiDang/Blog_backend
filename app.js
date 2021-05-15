@@ -6,9 +6,11 @@ const logger = require('morgan')
 const mongoose = require('mongoose')
 const flash = require('connect-flash')
 
+
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbPort = process.env.DB_PORT || 27017
-const dbName = process.env.DB_NAME || 'my_db_name'
+const dbName = process.env.DB_NAME || 'blog'
+
 const mongoUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`
 
 // Trong thơi gian docker-compose khởi tạo service app thì mongo chưa load xong, nên sẽ để 5s đẻ load
@@ -55,6 +57,10 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500)
   res.send({message:"error"})
+})
+const port = process.env.PORT
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
 })
 
 module.exports = app

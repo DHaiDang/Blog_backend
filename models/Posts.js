@@ -1,29 +1,34 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const ProductSchema = new Schema({
-  name: {
+const PostsSchema = new Schema({
+  title: {
     type: String,
     required: true,
     trim: true
   },
-  quantity: {
-    type: Number,
-    required: true
+  summary: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  content: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  publish: {
+    type: Date,
+    required: 'Please fill From Date'
   },
   image: String,
-  userCreated: {
-    ref: 'User',
-    required: true,
-    type: Schema.Types.ObjectId
-  }
 }, { timestamps: true })
 
-ProductSchema.statics.protectedFields = [
-  '_id',
-  '__v'
-]
+// PostsSchema.statics.protectedFields = [
+//   '_id',
+//   '__v'
+// ]
 
-const Product = mongoose.model('Product', ProductSchema)
+const Posts = mongoose.model('Posts', PostsSchema)
 
-module.exports = Product
+module.exports = Posts
