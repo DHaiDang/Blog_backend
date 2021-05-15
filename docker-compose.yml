@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+  app:
+    image: app/service:v1
+    volumes:
+      - ./:/app # Mount từ máy đang code vào trong container để có thể tự đọng reload khi mà thay đổi code
+    environment: # .env
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}" # .env
+    restart: unless-stopped
+    # depend_on là để chạy dựa trên service app, khi docker compose up thì sẽ chạy service app trước rồi chạy 2 service kia
+    depends_on:
+        - redis
+        - db
+  db:
+    image: mongo
+    volumes:
+      - .docker/data/db:/data/db
+    restart: unless-stopped
+  
+  redis:
+    image: redis:5-alpine
+    volumes:
+      - .docker/data/redis:/data
+    restart: unless-stopped
