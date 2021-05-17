@@ -17,6 +17,13 @@ docker build -t app/service:v1 .
 ```
 docker run --rm -v $(pwd):/app -w /app node:13-alpine npm install
 ```
+Giải thích :
+- Ở câu lệnh trên ta chạy câu lệnh docker tạo ra 1 container với option --rm là container chạy xong sẽ tự xoá
+- -v là volumn. Ánh xạ đường dẫn $(pwd):/app ở folder gốc vào đường dẫn /app ở trong Image - mount
+- -w là WORKDIR
+- node:13-alpine: tương đương với FROM:node:13-alpine
+- lệnh chạy và install npm
+
 - Thirst docker-compose :
 ```
 docker compose up
