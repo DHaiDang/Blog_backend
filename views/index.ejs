@@ -1,5 +1,58 @@
 <% include header %>
-<body>
-<h1>Hello Dangdh</h1>
-</body>
-</html>
+    <h1>Hello Dangdh</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Title</th>
+              <th scope="col">Last update</th>
+              <th scope="col">Action</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i<data.length; i++) {%>
+                <tr>
+                    <th scope="row"><%= data[i]._id %></th>
+                    <th scope="row"><%= data[i].title %></th>
+                    <th scope="row"><%= String(data[0].updatedAt).substring(0,24) %></th>
+                    <td class="" style="padding: 1em;">
+                    <div class="row">
+                        <a class="btn  col-6 btn-warning" href="/api/update?id=<%= data[i]._id %>" role="button">Update</a>
+                        <form method="post" action="/api/delete" style="padding: 0;" class="col-6">
+                            <input type="hidden" name="id" value="<%= data[i]._id %>">
+                            <button type="submit" name="submit_param" class="btn col-12 btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                    
+                </tr>
+             <% } %>
+            <!-- <tr>
+              <th scope="row">1</th>
+              <td>12351271623</td>
+              <td>Mot ngay o HUST</td>
+              <td class="" style="padding: 1em;">
+                <div class="row">
+                    <a class="btn  col-6 btn-warning" href="/api/update" role="button">Update</a>
+                    <form method="post" action="some_page" style="padding: 0;" class="col-6">
+                        <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                        <button type="submit" name="submit_param" value="submit_value" class="btn col-12 btn-danger">
+                          Delete
+                        </button>
+                    </form>
+                </div>
+              </td>
+            </tr> -->
+          </tbody>
+    </table>
+
+
+
+    <div class="row">
+        <a class="btn col btn-primary" href="/api/create" role="button">Create posts</a>
+    </div>
+    
+<% include footer %>
