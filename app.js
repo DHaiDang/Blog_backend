@@ -5,11 +5,12 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mongoose = require('mongoose')
 const flash = require('connect-flash')
+const ejs = require('ejs');
 
 
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbPort = process.env.DB_PORT || 27017
-const dbName = process.env.DB_NAME || 'blog'
+const dbName = process.env.DB_NAME || 'db_Blog'
 
 const mongoUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`
 
@@ -24,14 +25,14 @@ const connectWithRetry = function () {
 }
 connectWithRetry()
 
-const indexRouter = require('./routes/index')
+const api_blog = require('./routes/api_blog')
 
 const app = express()
 
 app.disable('x-powered-by')
 
 // setup template engine
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, '/views/'))
 app.set('view engine', 'ejs')
 
 app.use(logger('dev'))
@@ -41,7 +42,7 @@ app.use(cookieParser())
 app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(flash())
 
-app.use('/', indexRouter)
+app.use('/api', api_blog)
 
 // Lỗi 404 
 app.use((req, res, next) => {
@@ -60,7 +61,7 @@ app.use((err, req, res, next) => {
 })
 const port = process.env.PORT
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`dangdh11 Example app listening at http://localhost:${port}`)
 })
 
 module.exports = app

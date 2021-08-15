@@ -23,7 +23,6 @@ services:
     volumes:
       - .docker/data/db:/data/db
     restart: unless-stopped
-  
   redis:
     image: redis:5-alpine
     volumes:
