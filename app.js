@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mongoose = require('mongoose')
 const flash = require('connect-flash')
+const formidable = require('formidable');
 const ejs = require('ejs');
 
 
