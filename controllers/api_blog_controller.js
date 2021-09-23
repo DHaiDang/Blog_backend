@@ -29,6 +29,27 @@ class api_blog_posts {
             return res.status(200).send({ Message: 'Error', error})
         }
     }
+    static async uploadfile (req, res, next) {
+        var form = new formidable.IncomingForm();
+        form.multiples = true;
+        form.uploadDir = path.basename(path.dirname('/uploads/json_files/'))
+        form.on('file', function(field, file) {
+          fs.rename(file.path, path.join(form.uploadDir, file.name), function(err){
+              if (err) throw err;
+              const file_path = '/uploads/'+file.name
+          });
+        });
+        form.on('error', function(err) {
+            console.log('An error has occured: \n' + err);
+        });
+        form.on('end', function() {
+             res.statusMessage = "Process cashabck initiated";
+             res.statusCode = 200;
+             res.redirect('/')
+             res.end()
+        });
+        form.parse(req);
+    }
     static async update_post (req, res, next) {
         console.log("update post" + req.body.id)
         let posts = {
