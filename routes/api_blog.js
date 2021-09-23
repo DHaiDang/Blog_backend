@@ -15,6 +15,7 @@ router.post('/create', api_blog_controller.create_new_post)
 router.post('/update', api_blog_controller.update)
 router.post('/delete', api_blog_controller.delete)
 
+router.post('/uploadfile', api_blog_controller.uploadfile)
 //api
 router.get('/list', api_blog_controller.list)
 
